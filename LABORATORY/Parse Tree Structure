@@ -1,0 +1,38 @@
+import nltk
+from nltk import CFG
+from nltk.parse import ChartParser
+grammar = CFG.fromstring("""
+S -> NP VP
+NP -> 'I'
+NP -> DET N
+NP -> DET N PP
+VP -> V NP
+VP -> V NP PP
+PP -> P NP
+DET -> 'the'
+N -> 'man'
+N -> 'telescope'
+V -> 'saw'
+P -> 'with'
+""")
+parser = ChartParser(grammar)
+sentence = "I saw the man with a telescope".split()
+grammar = CFG.fromstring("""
+S -> NP VP
+NP -> 'I'
+NP -> DET N
+NP -> DET N PP
+VP -> V NP
+VP -> V NP PP
+PP -> P NP
+DET -> 'the' | 'a'
+N -> 'man' | 'telescope'
+V -> 'saw'
+P -> 'with'
+""")
+parser = ChartParser(grammar)
+print("Parse Trees:\n")
+for tree in parser.parse(sentence):
+    print(tree)
+    tree.pretty_print()
+    print()
