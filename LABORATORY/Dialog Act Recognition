@@ -1,0 +1,36 @@
+def dialog_act(sentence):
+
+    sentence = sentence.lower().strip()
+
+    if sentence.endswith("?"):
+        return "QUESTION"
+
+    elif sentence.startswith(("please", "could you", "would you", "can you")):
+        return "REQUEST"
+
+    elif sentence.startswith(("hello", "hi", "hey")):
+        return "GREETING"
+
+    elif sentence.startswith(("thank", "thanks")):
+        return "THANKING"
+
+    elif sentence.startswith(("yes", "okay", "sure")):
+        return "AGREEMENT"
+
+    elif sentence.startswith(("no", "not")):
+        return "DISAGREEMENT"
+
+    else:
+        return "STATEMENT"
+
+
+dialog = [
+    "Hello",
+    "How are you?",
+    "Please open the door",
+    "Thank you",
+    "Yes, I agree"
+]
+
+for sentence in dialog:
+    print(sentence, "->", dialog_act(sentence))
