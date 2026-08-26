@@ -1,0 +1,38 @@
+import re
+
+def rule_based_tagger(words):
+    tagged = []
+
+    for word in words:
+
+        if re.match(r'.*ing$', word):
+            tag = "VBG"
+
+        elif re.match(r'.*ed$', word):
+            tag = "VBD"
+
+        elif re.match(r'.*ly$', word):
+            tag = "RB"
+
+        elif re.match(r'.*s$', word):
+            tag = "NNS"
+
+        elif word.lower() in ["is", "am", "are", "was", "were"]:
+            tag = "VB"
+
+        elif word.lower() in ["the", "a", "an"]:
+            tag = "DT"
+
+        else:
+            tag = "NN"
+
+        tagged.append((word, tag))
+
+    return tagged
+
+
+sentence = "The boy is playing quickly"
+
+words = sentence.split()
+
+print(rule_based_tagger(words))
