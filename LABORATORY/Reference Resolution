@@ -1,0 +1,25 @@
+import re
+
+text = "John went to the store. He bought some milk. John gave it to Mary."
+
+sentences = text.split(".")
+
+last_person = None
+
+pronouns = ["he", "she", "him", "her", "it"]
+
+for sentence in sentences:
+
+    words = sentence.strip().split()
+
+    for word in words:
+
+        clean_word = re.sub(r'[^\w]', '', word)
+
+        if clean_word.lower() not in pronouns:
+            if clean_word.istitle():
+                last_person = clean_word
+
+        else:
+            if last_person:
+                print(clean_word, "->", last_person)
